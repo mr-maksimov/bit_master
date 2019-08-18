@@ -17,58 +17,6 @@ final class GildedRose {
     public function __construct($items) {
         $this->items = $items;
     }
-    /*Исходная функция, не используется delete*/
-    public function updateQuality_old() {
-        foreach ($this->items as $item) {
-            if ($item->name != GildedRose::AGED_BRIE and $item->name != GildedRose::BACKSTAGE) {
-                if ($item->quality > 0) {
-                    if ($item->name != GildedRose::SULFURAS) {
-                        $item->quality = $item->quality - 1;
-                    } else {
-                        $item->quality = 80;
-                    }
-                }
-            } else {
-                if ($item->quality < 50) {
-                    $item->quality = $item->quality + 1;
-                    if ($item->name == GildedRose::BACKSTAGE) {
-                        if ($item->sell_in < 11) {
-                            if ($item->quality < 50) {
-                                $item->quality = $item->quality + 1;
-                            }
-                        }
-                        if ($item->sell_in < 6) {
-                            if ($item->quality < 50) {
-                                $item->quality = $item->quality + 1;
-                            }
-                        }
-                    }
-                }
-            }
-            
-            if ($item->name != GildedRose::SULFURAS) {
-                $item->sell_in = $item->sell_in - 1;
-            }
-            
-            if ($item->sell_in < 0) {
-                if ($item->name != GildedRose::AGED_BRIE) {
-                    if ($item->name != GildedRose::BACKSTAGE) {
-                        if ($item->quality > 0) {
-                            if ($item->name != GildedRose::SULFURAS) {
-                                $item->quality = $item->quality - 1;
-                            }
-                        }
-                    } else {
-                        $item->quality = $item->quality - $item->quality;
-                    }
-                } else {
-                    if ($item->quality < 50) {
-                        $item->quality = $item->quality + 1;
-                    }
-                }
-            }
-        }
-    }
 
     /**
     *Увеличить качество если оно еще не больше 50
